@@ -1,3 +1,3 @@
 # react-calendar
 
-react calendar and scheduler app
+React calendar and scheduler app using [Day.js](https://day.js.org)
