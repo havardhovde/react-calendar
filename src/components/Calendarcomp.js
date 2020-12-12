@@ -11,19 +11,20 @@ dayjs.extend(isoWeek)
 
 const Calendarcomp = () => {
 
-    const [midWeek, setMidWeek] = useState(dayjs())
-    const startWeek = dayjs(midWeek).startOf('isoWeek')
-    const endWeek = dayjs(midWeek).endOf('isoWeek')
+    const [currentDate, setCurrentDate] = useState(dayjs())
+    const startWeek = dayjs(currentDate).startOf('isoWeek')
+    const endWeek = dayjs(currentDate).endOf('isoWeek')
     
     const [week, setWeek] = useState(dayjs().week())
 
+    //TODO: Do this without if statements
     const weekBack = () => {
         if(week === 1) {
             setWeek(52)
         } else {
             setWeek(week - 1)
         }
-        setMidWeek(dayjs(midWeek).subtract(1, 'w'))
+        setCurrentDate(dayjs(currentDate).subtract(1, 'w'))
     }
 
     const weekForward = () => {
@@ -32,8 +33,9 @@ const Calendarcomp = () => {
         } else {
             setWeek(week + 1)
         }
-        setMidWeek(dayjs(midWeek).add(1, 'w'))
+        setCurrentDate(dayjs(currentDate).add(1, 'w'))
     }
+
 
     return(
         <div className='container'>
@@ -43,10 +45,10 @@ const Calendarcomp = () => {
                 <button onClick={() => weekForward()}>forward</button> 
             </div>
             <div>start of week: {startWeek.format('D')}</div>
-            <div>middle of week: {dayjs(midWeek).format('D')}</div>
+            <div>current date: {dayjs(currentDate).format('D')}</div>
             <div>end of week: {endWeek.format('D')}</div>
             <div className='monthAndYear'>
-                {midWeek.format('MMMM YYYY')}
+                {currentDate.format('MMMM YYYY')}
             </div>
         </div>
     )
