@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import './Calendarcomp.css'
+import './Calendarcomp.scss'
 import dayjs from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import isoWeek from 'dayjs/plugin/isoWeek'
+import { DatePicker } from '@y0c/react-datepicker';
+import './Picker.scss'
 
 dayjs().format()
 dayjs.extend(weekOfYear)
@@ -39,6 +41,15 @@ const Calendarcomp = () => {
                 Week {week}
                 <button onClick={() => weekForward()}>forward</button> 
             </div>
+
+            <DatePicker
+            onChange={(date) => setCurrentDate(date)}
+            initialDate={currentDate}
+            dateFormat="DD/MM/YYYY"
+            showToday
+            showDefaultIcon
+            />
+
             <div>start of week: {startWeek.format('D')}</div>
             <div>end of week: {endWeek.format('D')}</div>
             <div className='monthAndYear'>
