@@ -1,15 +1,14 @@
-import  { useState } from 'react'
+import { useState } from 'react'
 import './Calendarcomp.scss'
 import './Picker.scss'
 import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import { DatePicker } from '@y0c/react-datepicker';;
+import { DatePicker } from '@y0c/react-datepicker';
 
 dayjs().format()
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
-
 
 const Calendarcomp = () => {
     
@@ -25,9 +24,9 @@ const Calendarcomp = () => {
         setCurrentDate(dayjs(currentDate).add(1, 'w'))
     }
 
-    let week:number = currentDate.week();
+    let week: number = currentDate.week();
 
-    let monthYearDisplay:string = currentDate.format('MMMM YYYY');
+    let monthYearDisplay: string = currentDate.format('MMMM YYYY');
 
     //Check if month changes mid-week
     if (startWeek.month() > endWeek.month() || startWeek.month() < endWeek.month()) {
