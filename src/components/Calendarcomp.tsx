@@ -10,14 +10,17 @@ dayjs().format()
 dayjs.extend(weekOfYear)
 dayjs.extend(isoWeek)
 
-
-
 const Calendarcomp = () => {
     
     const [currentDate, setCurrentDate] = useState(dayjs())
-    const startWeek: dayjs.Dayjs = dayjs(currentDate).startOf('isoWeek')
-    const endWeek: dayjs.Dayjs = dayjs(currentDate).endOf('isoWeek')
-    
+    const startWeek: any = dayjs(currentDate).startOf('isoWeek')
+    const endWeek: any = dayjs(currentDate).endOf('isoWeek')
+    const calendar = []
+
+    for(let i = 0; i < 7; i++) {
+        calendar.push(startWeek.add([i], 'd'))
+        console.log(calendar)
+    }    
     
     const weekBack = () => {
         setCurrentDate(dayjs(currentDate).subtract(1, 'w'))
@@ -45,15 +48,22 @@ const Calendarcomp = () => {
             </div>
 
             <DatePicker
-            onChange={(date) => setCurrentDate(date)}
+            onChange={(date: dayjs.Dayjs) => setCurrentDate(date)}
             initialDate={currentDate}
             dateFormat="DD/MM/YYYY"
             showToday
             showDefaultIcon
             />
+            <div className='dates'>
+                {
+                    calendar.map((date: dayjs.Dayjs, index: number) => {
+                        return (
+                        <div className={` date date${index}`} onClick={() => alert(date.add(1, 'hour'))} key={index}> {date.format('D') }</div>
+                        )
+                    })
+                }
+            </div>
 
-            <div>start of week: {startWeek.format('D')}</div>
-            <div>end of week: {endWeek.format('D')}</div>
             <div className='monthAndYear'>
                 {monthYearDisplay}
             </div>
