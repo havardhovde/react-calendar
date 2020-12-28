@@ -1,42 +1,38 @@
-import { useState } from 'react'
 import './Calendarcomp.scss'
 import './Picker.scss'
 import dayjs from 'dayjs';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
-import isoWeek from 'dayjs/plugin/isoWeek';
 import { DatePicker } from '@y0c/react-datepicker';
 
-dayjs().format()
-dayjs.extend(weekOfYear)
-dayjs.extend(isoWeek)
 
-const Calendarcomp = () => {
+const Calendarcomp = (props: any) => {
     
-    const [currentDate, setCurrentDate] = useState(dayjs())
-    const startWeek: any = dayjs(currentDate).startOf('isoWeek')
-    const endWeek: any = dayjs(currentDate).endOf('isoWeek')
     const calendar = []
 
     for(let i = 0; i < 7; i++) {
-        calendar.push(startWeek.add([i], 'd'))
+        calendar.push(props.startWeek.add([i], 'd'))
         console.log(calendar)
     }    
     
     const weekBack = () => {
-        setCurrentDate(dayjs(currentDate).subtract(1, 'w'))
+        props.setCurrentDate(dayjs(props.currentDate).subtract(1, 'w'))
     }
     
     const weekForward = () => {
-        setCurrentDate(dayjs(currentDate).add(1, 'w'))
+        props.setCurrentDate(dayjs(props.currentDate).add(1, 'w'))
     }
     
-    let week: number = currentDate.week();
+    let week: number = props.currentDate.week();
     
-    let monthYearDisplay: string = currentDate.format('MMMM YYYY');
+    let monthYearDisplay: string = props.currentDate.format('MMMM YYYY');
 
     // Check if month changes mid-week
-    if (startWeek.month() > endWeek.month() || startWeek.month() < endWeek.month()) {
-        monthYearDisplay = startWeek.format('MMMM YYYY') + '/' +  endWeek.format('MMMM YYYY')
+    if (props.startWeek.month() !== props.endWeek.month()) {
+        if(props.startWeek.year() !== props.endWeek.year()) {
+            monthYearDisplay = props.startWeek.format('MMMM YYYY') + '/' +  props.endWeek.format('MMMM YYYY')
+        }
+        else {
+            monthYearDisplay = props.startWeek.format('MMMM') + '/' + props.endWeek.format('MMMM YYYY')
+        }
     }
 
     return(
@@ -48,8 +44,8 @@ const Calendarcomp = () => {
             </div>
 
             <DatePicker
-            onChange={(date: dayjs.Dayjs) => setCurrentDate(date)}
-            initialDate={currentDate}
+            onChange={(date: dayjs.Dayjs) => props.setCurrentDate(date)}
+            initialDate={props.currentDate}
             dateFormat="DD/MM/YYYY"
             showToday
             showDefaultIcon
@@ -58,7 +54,7 @@ const Calendarcomp = () => {
                 {
                     calendar.map((date: dayjs.Dayjs, index: number) => {
                         return (
-                        <div className={` date date${index}`} onClick={() => alert(date.add(1, 'hour'))} key={index}> {date.format('D') }</div>
+                        <div className={` date date${index}`} onClick={() => props.setSelectedDate(date.format('DD MMM YYYY'))} key={index}> {date.format('D') }</div>
                         )
                     })
                 }
