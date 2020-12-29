@@ -28,10 +28,10 @@ const Calendarcomp = (props: any) => {
     // Check if month changes mid-week
     if (props.startWeek.month() !== props.endWeek.month()) {
         if(props.startWeek.year() !== props.endWeek.year()) {
-            monthYearDisplay = props.startWeek.format('MMMM YYYY') + '/' +  props.endWeek.format('MMMM YYYY')
+            monthYearDisplay = `${props.startWeek.format('MMMM YYYY')} / ${props.endWeek.format('MMMM YYYY')}`
         }
         else {
-            monthYearDisplay = props.startWeek.format('MMMM') + '/' + props.endWeek.format('MMMM YYYY')
+            monthYearDisplay = `${props.startWeek.format('MMMM')}/${props.endWeek.format('MMMM YYYY')}`
         }
     }
 
