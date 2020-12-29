@@ -3,7 +3,6 @@ import './Picker.scss'
 import dayjs from 'dayjs';
 import { DatePicker } from '@y0c/react-datepicker';
 
-
 const Calendarcomp = (props: any) => {
     
     const calendar = []
@@ -54,7 +53,13 @@ const Calendarcomp = (props: any) => {
                 {
                     calendar.map((date: dayjs.Dayjs, index: number) => {
                         return (
-                        <div className={` date date${index}`} onClick={() => props.setSelectedDate(date.format('DD MMM YYYY'))} key={index}> {date.format('D') }</div>
+                        <div 
+                        className={` date date${index}`} 
+                        onClick={() => props.setSelectedDate(date.format('DD MMM YYYY'))} 
+                        key={index}
+                        > 
+                            {date.format('D') }
+                        </div>
                         )
                     })
                 }
