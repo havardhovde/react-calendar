@@ -1,6 +1,8 @@
 const express = require("express")
 const app = express()
 const db = require("./db.js")
+var cors = require('cors');
+app.use(cors());
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -139,6 +141,12 @@ app.delete("/api/events/:id", (req, res, next) => {
 app.get("/", (req, res, next) => {
     res.json({"Message": "OK"})
 })
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 app.use(function(req, res) {
     res.status(404)
