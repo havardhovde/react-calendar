@@ -22,9 +22,7 @@ const App: React.FC<PropsInterface> = () => {
       .then((res) => res.json())
       .then((data) => setEvents(data))
       .catch((err) => console.error(err))
-    }, [selectedDate]);
-          
-    console.log('events from app: ' + JSON.stringify(events))
+  }, [selectedDate]);
 
   return (
     <div className="App">

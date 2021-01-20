@@ -14,7 +14,7 @@ const Dateinfo = (props: any) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(()  => {
-            props.events.data === undefined ? setIsLoaded(false) : setIsLoaded(true)
+        props.events.data === undefined ? setIsLoaded(false) : setIsLoaded(true)
     }, [props.events.data]);
 
     return(
