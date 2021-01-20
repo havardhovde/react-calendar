@@ -3,7 +3,6 @@ import './App.scss';
 import dayjs from 'dayjs';
 import Calendar from './components/Calendar'
 import Dateinfo from './components/DateInfo'
-import axios from 'axios';
 //@ts-ignore
 import useDimensions from "react-use-dimensions";
 
@@ -18,17 +17,12 @@ const App: React.FC<PropsInterface> = () => {
   const [events, setEvents] = useState<any>([]);
   const [calendarRef, calendarDimensions] = useDimensions();
 
-    useEffect(()  => {
-      axios
-          .get(`http://localhost:8000/api/events/${dayjs(selectedDate).format('DDMMYYYY')}`)
-          .then(function (res: any) {
-              console.log('response from app: ' + JSON.stringify(res.data.data));
-              setEvents(res.data)
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-          }, [selectedDate]);
+  useEffect(()  => {
+    fetch(`http://localhost:8000/api/events/${dayjs(selectedDate).format('DDMMYYYY')}`)
+      .then((res) => res.json())
+      .then((data) => setEvents(data))
+      .catch((err) => console.error(err))
+    }, [selectedDate]);
           
     console.log('events from app: ' + JSON.stringify(events))
 

@@ -24,23 +24,21 @@ app.get("/api/events", (req, res, next) => {
             return
         }
         res.json({
-            "message": "success",
             "data": rows
         })
     })
 })
 
-//get single event by start date
+//get events by start date
 app.get("/api/events/:startdate", (req, res, next) => {
     let sql = "select * from events where startdate = ?"
     let params = [req.params.startdate]
-    db.get(sql, params, (err, row) => {
+    db.all(sql, params, (err, row) => {
         if(err) {
             res.status(400).json({"error": err.message})
             return
         }
         res.json({
-            "message" : "success",
             "data": row
         })
     })
@@ -80,7 +78,6 @@ app.post("/api/events/", (req, res, next) => {
             return
         }
         res.json({
-            "message" : "success",
             "data": data,
             "id": this.lastID
         })
@@ -114,7 +111,6 @@ app.patch("/api/events/:id", (req, res, next) => {
                 return
             }
             res.json({
-                "mesage": "success",
                 "data": data,
                 "changes": this.changes
 

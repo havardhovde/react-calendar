@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Event from './Event'
 import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
@@ -10,23 +11,33 @@ dayjs.extend(isoWeek)
 dayjs.extend(advancedFormat)
 
 const Dateinfo = (props: any) => {
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(()  => {
+            props.events.data === undefined ? setIsLoaded(false) : setIsLoaded(true)
+    }, [props.events.data]);
+
     return(
         <div>
             <h1>
                 {dayjs(props.selectedDate).format('Do MMMM YYYY')}
             </h1>
 
-            {props.events.data === undefined 
-                ? <div>No events loaded</div>
-                : <Event 
-                    title={props.events.data.title} 
-                    startdate={props.events.data.startdate} 
-                    enddate={props.events.data.enddate}
-                    starttime={props.events.data.starttime}
-                    endtime={props.events.data.endtime}
-                    category={props.events.data.category}
-                    notes={props.events.data.notes}
-                />
+            {isLoaded && props.events.data.length > 0
+                ? props.events.data.map((event: { title: string; startdate: string; enddate: string | null; starttime: string; endtime: string | null; category: string; notes: string | null; }) => {
+                    return(
+                        <Event
+                            title={event.title}
+                            startdate={event.startdate}
+                            enddate={event.enddate}
+                            starttime={event.starttime}
+                            endtime={event.endtime}
+                            category={event.category}
+                            notes={event.notes}
+                        />
+                    )
+                })
+                : <div>No events found</div>
             }
         </div>
     )
