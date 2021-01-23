@@ -11,7 +11,7 @@ dayjs.extend(isoWeek)
 dayjs.extend(advancedFormat)
 
 const Dateinfo = (props: any) => {
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
     useEffect(()  => {
         props.events.data === undefined ? setIsLoaded(false) : setIsLoaded(true)
@@ -24,15 +24,16 @@ const Dateinfo = (props: any) => {
             </h1>
 
             {isLoaded && props.events.data.length > 0
-                ? props.events.data.map((event: { title: string; startdate: string; enddate: string | null; starttime: string; endtime: string | null; category: string; notes: string | null; }) => {
+                ? props.events.data.map((event: { id: number; title: string; startdate: string; enddate: string | null; starttime: string; endtime: string | null; category: string; notes: string | null; }) => {
                     return(
                         <Event
+                            key={event.id}
                             title={event.title}
+                            category={event.category}
                             startdate={event.startdate}
                             enddate={event.enddate}
                             starttime={event.starttime}
                             endtime={event.endtime}
-                            category={event.category}
                             notes={event.notes}
                         />
                     )
