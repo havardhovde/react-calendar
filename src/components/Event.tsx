@@ -17,31 +17,31 @@ const Event = (props: any) => {
                 <div onClick={() => toggleEditing()}><MdEdit/></div>
                 <label className='eventFields eventTitle'>
                 Title:
-                    <input type='text' value={props.title} />
+                    <input type='text' name='title' value={props.title} />
                 </label>
                 <label className='eventFields eventCategory'>
                 Category:
-                    <input type='text' value={props.category} />
+                    <input type='text' name='category' value={props.category} />
                 </label>
                 <label className='eventFields eventStartDate'>
                 Start date:
-                    <input type='text' value={props.startdate} />
+                    <input type='text' name='startdate' value={props.startdate} />
                 </label>
                 <label className='eventFields eventEndDate'>
                 End date:
-                    <input type='text' value={props.enddate} />
+                    <input type='text' name='enddate' value={props.enddate} />
                 </label>
                 <label className='eventFields eventStartTime'>
                 Start time:
-                    <input type='text' value={props.starttime} />
+                    <input type='text' name='starttime' value={props.starttime} />
                 </label>
                 <label className='eventFields eventEndTime'>
                 End time:
-                    <input type='text' value={props.endtime} />
+                    <input type='text' name='endtime' value={props.endtime} />
                 </label>
                 <label className='eventFields eventNotes'>
                 Notes:
-                    <input type='text' value={props.notes} />
+                    <input type='text' name='notes' value={props.notes} />
                 </label>
             </form>
             :

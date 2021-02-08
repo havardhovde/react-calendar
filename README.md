@@ -1,6 +1,6 @@
 # react-calendar
 
-React calendar and scheduler app using [Day.js](https://day.js.org) and TypeScript
+React calendar and scheduler app using [Day.js](https://day.js.org) and TypeScript, back end written in Node/Express and SQLite3
 
 ## How to run locally
 
